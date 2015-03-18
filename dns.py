@@ -34,37 +34,6 @@ class ProxyHandler(DatagramRequestHandler):
 
         client.sendto(dns_body, self.client_address)
 
-#         send_data = struct.pack("!H", len(data)) + data
-#         recv_data = send_tcp(send_data)
-#         if recv_data:
-#             recv_data = recv_data[2:]
-#             ip_list = "\n".join(
-#                 [str(r.rdata) for r in DNSRecord.parse(recv_data).rr]
-#                 )
-#             logbook.info("record name:\n{}".format(ip_list))
-#             client.sendto(recv_data, self.client_address)
-#
-# def send_tcp(data):
-#     """
-#         Helper function to send/receive DNS TCP request
-#         (in/out packets will have prepended TCP length header)
-#     """
-#     sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-#     sock.connect((args.dns, args.dns_port))
-#     sock.sendall(data)
-#     response = sock.recv(8192)
-#     try:
-#         assert len(response) >= 2
-#     except AssertionError:
-#         sock.close()
-#         logbook.error("ops! empty response")
-#     else:
-#         length = struct.unpack("!H",bytes(response[:2]))[0]
-#         while len(response) - 2 < length:
-#             response += sock.recv(8192)
-#         sock.close()
-#         return response
-
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description="DNS Proxy")
