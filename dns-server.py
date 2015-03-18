@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
+import argparse
 import socket
 import SocketServer
 
@@ -17,14 +18,16 @@ class ICMPRequestHandler(SocketServer.BaseRequestHandler):
     def handle(self):
         raw_data, local = self.request
         identifier, sequence, content = icmp.unpack_reply(raw_data)
-        logbook.info("identifier: {} sequence: {}"
-                     .format(identifier, sequence))
+        logbook.info("address: {} sequence: {}"
+                     .format(self.client_address[0], sequence))
 
         if sequence == 53:
-            remote = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            remote = socket.socket(
+                socket.AF_INET, socket.SOCK_DGRAM)
             remote.sendto(content, (args.dns, args.dns_port))
             icmp_body, _ = remote.recvfrom(8192)
         else:
+            logbook.warn(repr(content))
             icmp_body = content
 
         logbook.info("send back the content")
