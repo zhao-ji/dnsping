@@ -36,7 +36,12 @@ class ICMPRequestHandler(SocketServer.BaseRequestHandler):
 
 
 if __name__ == '__main__':
-    local_log = logbook.StderrHandler()
+    from os.path import join, dirname, abspath, exists
+    server_log_file = join(dirname(abspath(__file__)), "server.log")
+    if not exists(server_log_file):
+        open(server_log_file, "w").close()
+
+    local_log = logbook.FileHandler(server_log_file)
     local_log.format_string = (
         u'[{record.time:%H:%M:%S}] '
         u'lineno:{record.lineno} '
