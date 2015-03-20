@@ -56,9 +56,9 @@ if __name__ == "__main__":
         metavar="<address>",
         help="Local proxy listen address (default:all)")
     p.add_argument(
-        "--remote", "-r", default="chashuibiao.org",
+        "--remote", "-r", default="23.226.226.196",
         metavar="<remote dns server>",
-        help="Upstream DNS server (default:chashuibiao.org)")
+        help="Upstream DNS server (default:23.226.226.196)")
     p.add_argument(
         "--dirty", "-d", default="114.114.114.114",
         metavar="<china dirty dns server>",
