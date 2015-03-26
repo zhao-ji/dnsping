@@ -1423,6 +1423,7 @@ china_domain_list = [
     "uzai.com",
     "uzaicdn.com",
     "uzzf.com",
+    "v2ex.com",
     "vaikan.com",
     "vancl.com",
     "vcimg.com",
