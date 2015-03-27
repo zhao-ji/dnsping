@@ -37,9 +37,13 @@ class ProxyHandler(DatagramRequestHandler):
             remote.sendto(send_packet, (args.remote, 1))
             dns_body = icmp.unpack(remote.recv(8192))
 
-        ip_list = "\n".join(
-            [str(r.rdata) for r in DNSRecord.parse(dns_body).rr]
-            )
+        try:
+            ip_list = "\n".join(
+                [str(r.rdata) for r in DNSRecord.parse(dns_body).rr]
+                )
+        except Exception, e:
+            logbook.error(e)
+            ip_list = "error occur!"
         logbook.info("record name:\n{}".format(ip_list))
 
         client.sendto(dns_body, self.client_address)
