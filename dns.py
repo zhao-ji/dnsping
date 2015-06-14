@@ -4,8 +4,6 @@
 import argparse
 import socket
 from SocketServer import ThreadingUDPServer, DatagramRequestHandler
-# import struct
-
 
 from dnslib import DNSRecord
 import logbook
